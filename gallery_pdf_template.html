@@ -1,0 +1,49 @@
+{% load static %}
+<html>
+<head>
+    <title>Gallery Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Gallery Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Category</th>
+                <th>Donor Details</th>
+                <th>Volunteer Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in gallery %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <h3>Cloth Donation</h3>
+                    <img src="{{ i.deliverypic.url }}" width="100" height="100" />
+                    <p>Donation Area: {{ i.donation.donationarea.areaname }}</p>
+                    <p>Donation Date: {{ i.donation.donationdate }}</p>
+                </td>
+                <td>
+                    <img src="{{ i.donation.donor.userpic.url }}" width="50" height="50" />
+                    <p>{{ i.donation.donor.user.first_name }} {{ i.donation.donor.user.last_name }}</p>
+                    <p>{{ i.donation.donor.user.email }}</p>
+                    <p>{{ i.donation.donor.contact }}</p>
+                </td>
+                <td>
+                    <img src="{{ i.donation.volunteer.userpic.url }}" width="50" height="50" />
+                    <p>{{ i.donation.volunteer.user.first_name }} {{ i.donation.volunteer.user.last_name }}</p>
+                    <p>{{ i.donation.volunteer.user.email }}</p>
+                    <p>{{ i.donation.volunteer.contact }}</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
